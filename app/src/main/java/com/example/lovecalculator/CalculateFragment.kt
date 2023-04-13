@@ -38,25 +38,6 @@ class CalculateFragment : Fragment() {
     private fun initClickers() {
         with(binding) {
             calculateBtn.setOnClickListener {
-                RetrofitService().api.calculateLove(
-                    firstNameEd.text.toString(),
-                    secondNameEd.text.toString()
-                )
-                    .enqueue(object : Callback<LoveModel> {
-                        override fun onResponse(
-                            call: Call<LoveModel>,
-                            response: Response<LoveModel>
-                        ) {
-                            if (response.isSuccessful) {
-
-                            }
-                        }
-
-                        override fun onFailure(call: Call<LoveModel>, t: Throwable) {
-                            Log.e("ololo", "OnFailure ${t.message}")
-                        }
-
-                    })
                 viewModel.getLiveLove(firstNameEd.text.toString(), secondNameEd.text.toString())
                     .observe(
                         viewLifecycleOwner, Observer {
