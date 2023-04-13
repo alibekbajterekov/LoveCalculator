@@ -7,16 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.lovecalculator.databinding.FragmentCalculateBinding
+import com.example.lovecalculator.remote.LoveModel
+import com.example.lovecalculator.remote.RetrofitService
+import com.example.lovecalculator.viewmodel.LoveViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-
 class CalculateFragment : Fragment() {
 
     private lateinit var binding: FragmentCalculateBinding
+    private val viewModel: LoveViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +32,6 @@ class CalculateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initClickers()
     }
 
@@ -45,8 +48,7 @@ class CalculateFragment : Fragment() {
                             response: Response<LoveModel>
                         ) {
                             if (response.isSuccessful) {
-                                findNavController().navigate(R.id.resultFragment, bundleOf("key" to (response.body()?.percentage
-                                        )))
+
                             }
                         }
 
@@ -55,8 +57,18 @@ class CalculateFragment : Fragment() {
                         }
 
                     })
+                viewModel.getLiveLove(firstNameEd.text.toString(), secondNameEd.text.toString())
+                    .observe(
+                        viewLifecycleOwner, Observer {
+                            findNavController().navigate(
+                                R.id.resultFragment, bundleOf(
+                                    "key" to (it?.percentage
+                                            )
+                                )
+                            )
+                        }
+                    )
             }
         }
     }
-
 }
