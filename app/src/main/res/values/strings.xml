@@ -10,4 +10,10 @@
     <string name="try_again">Try Again!</string>
     <string name="me">Me</string>
     <string name="love">❤</string>
+    <string name="history">History</string>
+    <string name="percentage">Percentage</string>
+    <string name="result">Result</string>
+    <string name="title">Title</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
 </resources>

@@ -1,13 +1,12 @@
 package com.example.lovecalculator.remote
 
 
+import com.example.lovecalculator.model.LoveModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
-
 interface LoveApi {
-
     @GET("getPercentage")
     fun calculateLove(
         @Query("fname") firstName:String,
